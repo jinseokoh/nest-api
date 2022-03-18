@@ -4,22 +4,30 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { CoffeesModule } from './coffees/coffees.module';
 import { join } from 'path';
+import { CoffeeRatingModule } from './coffee-rating/coffee-rating.module';
+import { DatabaseModule } from './database/database.module';
+import { ConfigModule } from '@nestjs/config';
+import { CommonModule } from './common/common.module';
 
 @Module({
   imports: [
+    ConfigModule.forRoot(),
     CoffeesModule,
     TypeOrmModule.forRoot({
       type: 'mysql',
-      host: 'localhost',
-      port: 3306,
-      username: 'root',
-      password: 'secret',
-      database: 'meso',
+      host: process.env.DATABASE_HOST,
+      port: +process.env.DATABASE_PORT,
+      username: process.env.DATABASE_USER,
+      password: process.env.DATABASE_PASS,
+      database: process.env.DATABASE_NAME,
       entities: [join(__dirname, '**', '*.entity.{ts,js}')],
       bigNumberStrings: false,
       // autoLoadEntities: true,
       synchronize: true,
     }),
+    CoffeeRatingModule,
+    DatabaseModule,
+    CommonModule,
   ],
   controllers: [AppController],
   providers: [AppService],
