@@ -12,7 +12,7 @@ export class WrapResponseInterceptor implements NestInterceptor {
     console.log('before...');
 
     return next.handle().pipe(
-      tap((data) => console.log(data)),
+      // tap((data) => console.log(data)),
       map((data) => ({ data })),
     );
   }

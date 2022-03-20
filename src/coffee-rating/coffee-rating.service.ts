@@ -5,9 +5,3 @@ import { Injectable } from '@nestjs/common';
 export class CoffeeRatingService {
   constructor(private readonly coffeeService: CoffeesService) {}
 }
-
-
-
-
-
-

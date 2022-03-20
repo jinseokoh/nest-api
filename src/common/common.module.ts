@@ -20,8 +20,7 @@ import { APP_GUARD } from '@nestjs/core';
 })
 export class CommonModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
-    consumer
-      .apply(LoggingMiddleware)
-      .forRoutes({ path: 'coffees', method: RequestMethod.GET });
+    consumer.apply(LoggingMiddleware).forRoutes('*');
   }
+  // .forRoutes({ path: 'coffees', method: RequestMethod.GET });
 }

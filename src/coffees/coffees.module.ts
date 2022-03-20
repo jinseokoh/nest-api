@@ -6,19 +6,20 @@ import { CoffeesController } from './coffees.controller';
 import { CoffeesService } from './coffees.service';
 import { Coffee } from './entities/coffee.entity';
 import { Flavor } from './entities/flavor.entity';
+import { Event } from './../events/entities/event.entity';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([Coffee, Flavor]), ConfigModule],
+  imports: [TypeOrmModule.forFeature([Coffee, Flavor, Event]), ConfigModule],
   controllers: [CoffeesController],
   providers: [
     CoffeesService,
-    {
-      provide: COFFEE_BRANDS,
-      useFactory: async (): Promise<string[]> => {
-        const brands = Promise.resolve(['bad guys', 'nescafe']);
-        return brands;
-      },
-    },
+    // {
+    //   provide: COFFEE_BRANDS,
+    //   useFactory: async (): Promise<string[]> => {
+    //     const brands = Promise.resolve(['bad guys', 'nescafe']);
+    //     return brands;
+    //   },
+    // },
   ],
   exports: [CoffeesService],
 })
